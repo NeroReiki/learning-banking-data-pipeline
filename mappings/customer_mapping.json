@@ -1,0 +1,51 @@
+
+{
+  "source_entity": "data/customer_master.csv",
+  "target_table": "customers",
+  "description": "Mapping configuration for synthetic banking customer data to the PostgreSQL schema.",
+  "column_mappings": {
+    "cust_id": {
+      "target_column": "customer_id",
+      "data_type": "VARCHAR(20)",
+      "is_primary_key": true,
+      "allow_null": false,
+      "transformations": ["strip_whitespace", "uppercase"]
+    },
+    "full_name": {
+      "target_column": "full_name",
+      "data_type": "VARCHAR(100)",
+      "allow_null": false,
+      "transformations": ["strip_whitespace", "title_case"]
+    },
+    "ic_no": {
+      "target_column": "nric_number",
+      "data_type": "VARCHAR(30)",
+      "allow_null": true,
+      "transformations": ["strip_whitespace"]
+    },
+    "phone_no": {
+      "target_column": "phone_number",
+      "data_type": "VARCHAR(30)",
+      "allow_null": true,
+      "transformations": ["strip_whitespace"]
+    },
+    "dob": {
+      "target_column": "date_of_birth",
+      "data_type": "DATE",
+      "allow_null": true,
+      "transformations": ["standardize_date"]
+    },
+    "gender": {
+      "target_column": "gender",
+      "data_type": "VARCHAR(10)",
+      "allow_null": true,
+      "transformations": ["standardize_gender"]
+    },
+    "created_at": {
+      "target_column": "created_date",
+      "data_type": "DATE",
+      "allow_null": false,
+      "transformations": ["standardize_date"]
+    }
+  }
+}

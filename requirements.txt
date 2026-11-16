@@ -1,0 +1,6 @@
+
+pandas
+SQLAlchemy
+ipykernel
+psycopg2-binary
+

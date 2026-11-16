@@ -1,0 +1,40 @@
+
+{
+  "source_entity": "data/transaction_history.csv",
+  "target_table": "transactions",
+  "description": "Mapping configuration for synthetic banking transaction records to the PostgreSQL schema.",
+  "column_mappings": {
+    "transaction_id": {
+      "target_column": "transaction_id",
+      "data_type": "VARCHAR(30)",
+      "is_primary_key": true,
+      "allow_null": false,
+      "transformations": ["strip_whitespace", "uppercase"]
+    },
+    "account_id": {
+      "target_column": "account_number",
+      "data_type": "VARCHAR(20)",
+      "is_foreign_key": true,
+      "allow_null": false,
+      "transformations": ["strip_whitespace", "uppercase"]
+    },
+    "txn_type": {
+      "target_column": "transaction_type",
+      "data_type": "VARCHAR(20)",
+      "allow_null": false,
+      "transformations": ["standardize_txn_type"]
+    },
+    "amount": {
+      "target_column": "transaction_amount",
+      "data_type": "DECIMAL(15,2)",
+      "allow_null": false,
+      "transformations": ["absolute_value"]
+    },
+    "txn_date": {
+      "target_column": "transaction_timestamp",
+      "data_type": "TIMESTAMP",
+      "allow_null": false,
+      "transformations": ["standardize_datetime"]
+    }
+  }
+}

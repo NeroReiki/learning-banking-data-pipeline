@@ -1,0 +1,46 @@
+
+{
+  "source_entity": "data/account_master.csv",
+  "target_table": "accounts",
+  "description": "Mapping configuration for synthetic banking account data to the PostgreSQL schema.",
+  "column_mappings": {
+    "account_id": {
+      "target_column": "account_number",
+      "data_type": "VARCHAR(20)",
+      "is_primary_key": true,
+      "allow_null": false,
+      "transformations": ["strip_whitespace", "uppercase"]
+    },
+    "cust_id": {
+      "target_column": "customer_id",
+      "data_type": "VARCHAR(20)",
+      "is_foreign_key": true,
+      "allow_null": false,
+      "transformations": ["strip_whitespace", "uppercase"]
+    },
+    "account_type": {
+      "target_column": "account_type",
+      "data_type": "VARCHAR(30)",
+      "allow_null": false,
+      "transformations": ["standardize_account_type"]
+    },
+    "balance": {
+      "target_column": "current_balance",
+      "data_type": "DECIMAL(15,2)",
+      "allow_null": false,
+      "transformations": ["clean_negative_balance"]
+    },
+    "status": {
+      "target_column": "account_status",
+      "data_type": "VARCHAR(15)",
+      "allow_null": false,
+      "transformations": ["standardize_status"]
+    },
+    "opened_date": {
+      "target_column": "opened_date",
+      "data_type": "DATE",
+      "allow_null": false,
+      "transformations": ["standardize_date"]
+    }
+  }
+}
